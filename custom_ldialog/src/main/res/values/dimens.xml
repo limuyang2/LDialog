@@ -1,0 +1,8 @@
+<resources>
+
+    <dimen name="ios_dialog_title_size">16sp</dimen>
+    <dimen name="ios_dialog_msg_size">14sp</dimen>
+    <dimen name="ios_dialog_left_btn_text_size">14sp</dimen>
+    <dimen name="ios_dialog_right_btn_text_size">14sp</dimen>
+
+</resources>

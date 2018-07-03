@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:textColor="@color/ios_dialog_title_color"
+        android:textSize="@dimen/ios_dialog_title_size"
+        android:textStyle="bold"
+        tools:text="Title" />
+
+    <TextView
+        android:id="@+id/msg_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="15dp"
+        android:gravity="center"
+        android:textColor="@color/ios_dialog_msg_color"
+        android:textSize="@dimen/ios_dialog_msg_size"
+        tools:text="Message" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="20dp"
+        android:background="#d9d9d9" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/neg_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_ios_dialog_left"
+            android:gravity="center"
+            android:textColor="@color/ios_dialog_button_def_color"
+            android:textSize="16sp" />
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="0.5dp"
+            android:layout_height="43dp"
+            android:background="#d9d9d9" />
+
+        <Button
+            android:id="@+id/pos_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_ios_dialog_right"
+            android:gravity="center"
+            android:textColor="@color/ios_dialog_button_def_color"
+            android:textSize="15sp" />
+    </LinearLayout>
+
+</LinearLayout>

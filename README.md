@@ -1,2 +1,3 @@
 # LDialog
-👏LDialog
+
+一个基于DialogFragment封装的的库，完善施工中...

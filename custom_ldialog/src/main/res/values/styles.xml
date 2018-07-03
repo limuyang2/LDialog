@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="LDialogBottomAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/bottom_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/bottom_out_anim</item>
+    </style>
+
+</resources>
