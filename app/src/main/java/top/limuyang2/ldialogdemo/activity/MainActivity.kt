@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                             })
                         }
                     })
-                    .setNeedKeyboardViewId(R.id.input_editText)
+                    .setNeedKeyboardEditTextId(R.id.input_editText)
                     .show()
         }
     }

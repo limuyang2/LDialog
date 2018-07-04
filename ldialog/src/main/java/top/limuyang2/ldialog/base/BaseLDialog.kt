@@ -262,7 +262,12 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         return this as T
     }
 
-    fun setNeedKeyboardViewId(id: Int): T {
+    /**
+     * auto open keyboard, (only EditText)
+     * @param id Int EditTextView ID
+     * @return T
+     */
+    fun setNeedKeyboardEditTextId(id: Int): T {
         baseParams.needKeyboardViewId = id
         return this as T
     }
