@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
+import top.limuyang2.customldialog.BottomTextListDialog
 import top.limuyang2.customldialog.MessageIOSDialog
 import top.limuyang2.ldialog.base.OnDialogDismissListener
 import top.limuyang2.ldialogdemo.R
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                     .setPositiveButton("确定", View.OnClickListener {
                         Toast.makeText(this, "点击了确定", Toast.LENGTH_SHORT).show()
                     })
-                    .setDismissListener(object : OnDialogDismissListener(){
+                    .setDismissListener(object : OnDialogDismissListener() {
                         override fun onDismiss(dialog: DialogInterface?) {
                             System.out.println("dialog dismiss")
                         }
@@ -43,6 +44,16 @@ class MainActivity : AppCompatActivity() {
 //                    .setWidthScale(1f)
 //                    .setCancelableAll(false)
                     .setCancelableOutside(true)
+                    .show()
+        }
+
+        bottom_textList_dialog_btn.setOnClickListener {
+            val list = ArrayList<String>()
+            for (i in 0..10) {
+                list.add("Test item $i")
+            }
+            BottomTextListDialog.init(supportFragmentManager)
+                    .setTextList(list)
                     .show()
         }
     }

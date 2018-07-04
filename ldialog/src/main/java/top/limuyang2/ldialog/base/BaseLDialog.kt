@@ -17,7 +17,7 @@ import kotlinx.android.parcel.Parcelize
 import top.limuyang2.ldialog.R
 
 /**
- *
+ * BaseDialog(Can inherit this class)
  * Date 2018/6/26
  * @author limuyang
  */
@@ -30,7 +30,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
 
     private var onDialogDismissListener: OnDialogDismissListener? = null
 
-    private lateinit var mContext: Context
+    protected lateinit var mContext: Context
 
     init {
         baseParams = BaseDialogParams().apply {
@@ -55,8 +55,8 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        //Restore UI status
         savedInstanceState?.let {
-            //恢复UI状态
             baseParams = it.getParcelable(KEY_PARAMS)
             viewHandlerListener = savedInstanceState.getParcelable(KEY_VIEW_HANDLER)
             onDialogDismissListener = savedInstanceState.getParcelable(KEY_DISMISS_LISTENER)
@@ -66,6 +66,8 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
+        //Clear the title of Android4.4
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
             baseParams.layoutRes > 0 -> inflater.inflate(baseParams.layoutRes, container)
             baseParams.view != null -> baseParams.view!!
@@ -82,23 +84,27 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
     //save UI state
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putParcelable(KEY_PARAMS, baseParams)
-        outState.putParcelable(KEY_VIEW_HANDLER, viewHandlerListener)
-        outState.putParcelable(KEY_DISMISS_LISTENER, onDialogDismissListener)
+        outState.apply {
+            putParcelable(KEY_PARAMS, baseParams)
+            putParcelable(KEY_VIEW_HANDLER, viewHandlerListener)
+            putParcelable(KEY_DISMISS_LISTENER, onDialogDismissListener)
+        }
     }
 
     override fun onStart() {
         super.onStart()
 
+        //Get screen size
         val point = Point()
         val windowManager = activity?.getSystemService(Context.WINDOW_SERVICE) as? WindowManager
         windowManager?.defaultDisplay?.getSize(point)
 
+        //Set window
         dialog.window?.let {
             val params = it.attributes
             params.gravity = baseParams.gravity
-
-            //set dialog width
+            it.attributes
+            //Set dialog width
             when {
                 baseParams.widthScale > 0f -> {
                     if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && !baseParams.keepWidthScale) {
@@ -113,7 +119,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                 else -> params.width = WindowManager.LayoutParams.WRAP_CONTENT
             }
 
-            //set dialog height
+            //Set dialog height
             when {
                 baseParams.heightScale > 0f -> {
                     if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && !baseParams.keepHeightScale) {
@@ -133,7 +139,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             it.setWindowAnimations(baseParams.animStyle)
         }
 
-        //set touch cancelable
+        //Set touch cancelable
         if (!baseParams.cancelable) {
             isCancelable = baseParams.cancelable
         } else {
@@ -147,16 +153,12 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         onDialogDismissListener?.onDismiss(dialog)
     }
 
-    override fun onLowMemory() {
-        super.onLowMemory()
-        dismiss()
-    }
 
     protected fun setFragmentManager(fragmentManager: FragmentManager) {
         baseParams.fragmentManager = fragmentManager
     }
 
-    /*** Set Params  (start)***/
+    /*** Set Params  (start) [External call]***/
     fun setTag(tag: String): T {
         baseParams.tag = tag
         return this as T
@@ -167,6 +169,17 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         return this as T
     }
 
+    fun setGravity(gravity: Int): T {
+        baseParams.gravity = gravity
+        return this as T
+    }
+
+    /**
+     * Dialog occupies the proportion of the screen
+     * {setWidthScale()} priority is higher than {setWidthDp()}
+     * @param scale Float
+     * @return T
+     */
     fun setWidthScale(@FloatRange(from = 0.0, to = 1.0) scale: Float): T {
         baseParams.widthScale = scale
         return this as T
@@ -188,23 +201,23 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
     }
 
     /**
-     * 当屏幕旋转后，是否保持所设置的宽度比例
-     * 默认不保持
-     * @param isKeep Boolean
+     * Whether to maintain the {setWidthScale()} when the screen is rotated
+     * If not set {setWidthScale()}, This item does not take effect
+     * @param isKeep Boolean [Default false]
      * @return T
      */
-    fun isKeepWidthScale(isKeep: Boolean): T {
+    fun setKeepWidthScale(isKeep: Boolean): T {
         baseParams.keepWidthScale = isKeep
         return this as T
     }
 
     /**
-     * 当屏幕旋转后，是否保持所设置的高度比例
-     * 默认不保持
-     * @param isKeep Boolean
+     * Whether to maintain the {setHeightScale()} when the screen is rotated
+     * If not set {setHeightScale()}, This item does not take effect
+     * @param isKeep Boolean [Default false]
      * @return T
      */
-    fun isKeepHeightScale(isKeep: Boolean): T {
+    fun setKeepHeightScale(isKeep: Boolean): T {
         baseParams.keepHeightScale = isKeep
         return this as T
     }
@@ -229,16 +242,6 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         baseParams.animStyle = animStyleRes
         return this as T
     }
-
-//    fun setInAnimation(animation: Animation): T {
-//
-//        return this as T
-//    }
-//
-//    fun setOutAnimation(animation: Animation): T {
-//
-//        return this as T
-//    }
 
     fun show(): T {
         show(baseParams.fragmentManager, baseParams.tag)

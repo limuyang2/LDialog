@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    
+
     <color name="dialog_text_color">#333333</color>
-    
+
     <color name="ios_dialog_title_color">@color/dialog_text_color</color>
     <color name="ios_dialog_msg_color">@color/dialog_text_color</color>
     <color name="ios_dialog_button_def_color">#0079fd</color>
-    <color name="ios_dialog_left_btn_normal">#00ffffff</color>
-    <color name="ios_dialog_left_btn_pressed">#ace2e2e2</color>
+    <color name="ios_dialog_btn_normal">#00ffffff</color>
+    <color name="ios_dialog_btn_pressed">#aceaeaea</color>
 
+    <color name="bottom_text_list_dialog_divide_line_color">#e4e4e4</color>
 
 </resources>
