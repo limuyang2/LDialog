@@ -19,11 +19,9 @@ class BottomTextListDialog : BaseLDialog<BottomTextListDialog>() {
 
     init {
         setWidthScale(1f)
-        setHeightScale(0.6f)
+        setKeepWidthScale(true)
         setGravity(Gravity.BOTTOM)
         setAnimStyle(R.style.LDialogBottomAnimation)
-        setKeepWidthScale(true)
-        setKeepHeightScale(true)
     }
 
     private val textList = ArrayList<String>()

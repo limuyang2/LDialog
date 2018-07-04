@@ -13,8 +13,12 @@ import android.support.annotation.LayoutRes
 import android.support.annotation.StyleRes
 import android.support.v4.app.FragmentManager
 import android.view.*
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import kotlinx.android.parcel.Parcelize
 import top.limuyang2.ldialog.R
+
+
 
 /**
  * BaseDialog(Can inherit this class)
@@ -70,8 +74,8 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
             baseParams.layoutRes > 0 -> inflater.inflate(baseParams.layoutRes, container)
-            baseParams.view != null -> baseParams.view!!
-            else ->
+            baseParams.view != null  -> baseParams.view!!
+            else                     ->
                 throw IllegalArgumentException("请先设置LayoutRes或View!")
         }
     }
@@ -79,6 +83,21 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewHandlerListener?.convertView(ViewHolder.create(view), this)
+
+        //Set open Keyboard
+        if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT && baseParams.needKeyboardViewId != 0) {
+            val editText = view.findViewById<EditText>(baseParams.needKeyboardViewId)
+
+            editText.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
+                override fun onGlobalLayout() {
+                    val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                              ?: return
+                    if (imm.showSoftInput(editText, 0)) {
+                        editText.viewTreeObserver.removeOnGlobalLayoutListener(this)
+                    }
+                }
+            })
+        }
     }
 
     //save UI state
@@ -114,9 +133,9 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                         params.width = (point.x * baseParams.widthScale).toInt()
                     }
                 }
-                baseParams.widthDp > 0f -> params.width = dp2px(mContext, baseParams.widthDp)
+                baseParams.widthDp > 0f    -> params.width = dp2px(mContext, baseParams.widthDp)
 
-                else -> params.width = WindowManager.LayoutParams.WRAP_CONTENT
+                else                       -> params.width = WindowManager.LayoutParams.WRAP_CONTENT
             }
 
             //Set dialog height
@@ -129,9 +148,9 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                         params.height = (point.y * baseParams.heightScale).toInt()
                     }
                 }
-                baseParams.heightDp > 0f -> params.height = dp2px(mContext, baseParams.heightDp)
+                baseParams.heightDp > 0f    -> params.height = dp2px(mContext, baseParams.heightDp)
 
-                else -> params.height = WindowManager.LayoutParams.WRAP_CONTENT
+                else                        -> params.height = WindowManager.LayoutParams.WRAP_CONTENT
             }
 
             it.attributes = params
@@ -243,6 +262,11 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         return this as T
     }
 
+    fun setNeedKeyboardViewId(id: Int): T {
+        baseParams.needKeyboardViewId = id
+        return this as T
+    }
+
     fun show(): T {
         show(baseParams.fragmentManager, baseParams.tag)
         return this as T
@@ -281,7 +305,8 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             var cancelable: Boolean = true,
             var cancelableOutside: Boolean = true,
             var backgroundDrawableRes: Int = R.drawable.def_dialog_bg,
-            var animStyle: Int = 0
+            var animStyle: Int = 0,
+            var needKeyboardViewId: Int = 0
     ) : UnParcelableParams(), Parcelable
 
 }

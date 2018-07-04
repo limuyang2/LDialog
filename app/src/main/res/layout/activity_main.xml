@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,35 +11,75 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="This is Activity"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/goToFragment"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="go to Fragment"
+                android:textAllCaps="false" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#e7e7e7" />
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="This is Activity"
-            android:textStyle="bold" />
-
-        <Button
-            android:id="@+id/goToFragment"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="go to Fragment"
+            android:layout_margin="8dp"
+            android:text="CustomLDialog Liability" />
+
+        <Button
+            android:id="@+id/ios_dialog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="iOS风格消息弹框"
             android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/bottom_textList_dialog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="底部列表" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="#e7e7e7" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="LDialog Liability" />
+
+        <Button
+            android:id="@+id/editText_dialog_btn"
+            android:text="输入框"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享" />
     </LinearLayout>
-
-
-    <Button
-        android:id="@+id/ios_dialog_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="iOS风格消息弹框"
-        android:textAllCaps="false" />
-
-    <Button
-        android:id="@+id/bottom_textList_dialog_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="底部列表" />
-</LinearLayout>
+</ScrollView>

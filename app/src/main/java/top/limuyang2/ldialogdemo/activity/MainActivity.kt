@@ -6,11 +6,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import top.limuyang2.customldialog.BottomTextListDialog
 import top.limuyang2.customldialog.MessageIOSDialog
-import top.limuyang2.ldialog.base.OnDialogDismissListener
+import top.limuyang2.ldialog.LDialog
+import top.limuyang2.ldialog.base.*
 import top.limuyang2.ldialogdemo.R
 import top.limuyang2.ldialogdemo.fragment.FragmentActivity
 
@@ -41,8 +43,6 @@ class MainActivity : AppCompatActivity() {
                             System.out.println("dialog dismiss")
                         }
                     })
-//                    .setWidthScale(1f)
-//                    .setCancelableAll(false)
                     .setCancelableOutside(true)
                     .show()
         }
@@ -54,6 +54,30 @@ class MainActivity : AppCompatActivity() {
             }
             BottomTextListDialog.init(supportFragmentManager)
                     .setTextList(list)
+                    .setHeightScale(0.6f)
+                    .setKeepHeightScale(true)
+                    .show()
+        }
+
+        /*** LDialog Liability ***/
+        editText_dialog_btn.setOnClickListener {
+            LDialog.init(supportFragmentManager)
+                    .setLayoutRes(R.layout.ldialog_edittext)
+                    .setWidthScale(0.6f)
+                    .setViewHandlerListener(object : ViewHandlerListener() {
+                        override fun convertView(holder: ViewHolder, dialog: BaseLDialog<*>) {
+                            val editText = holder.getView<EditText>(R.id.input_editText)
+                            holder.setOnClickListener(R.id.ok_btn, View.OnClickListener {
+                                Toast.makeText(this@MainActivity, editText.text, Toast.LENGTH_SHORT).show()
+                                dialog.dismiss()
+                            })
+
+                            holder.setOnClickListener(R.id.close_btn, View.OnClickListener {
+                                dialog.dismiss()
+                            })
+                        }
+                    })
+                    .setNeedKeyboardViewId(R.id.input_editText)
                     .show()
         }
     }
