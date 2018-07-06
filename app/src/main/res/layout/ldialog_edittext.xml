@@ -3,36 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingRight="8dp"
+    android:paddingTop="10dp"
+    android:paddingBottom="25dp"
+    android:paddingLeft="8dp">
 
     <EditText
         android:id="@+id/input_editText"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-android:layout_margin="10dp"
-        android:hint="Input content" />
+        android:layout_weight="1"
+        android:background="#e7e7e7"
+        android:hint="Input content"
+        android:padding="8dp"
+        android:textSize="14sp" />
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:gravity="right">
+    <ImageView
+        android:tint="@color/colorPrimaryDark"
+        android:id="@+id/sendBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="8dp"
+        android:src="@drawable/ic_send" />
 
-        <Button
-            android:id="@+id/close_btn"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="取消" />
+    <!--<LinearLayout-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_gravity="right"-->
+    <!--android:gravity="right">-->
 
-        <Button
-            android:id="@+id/ok_btn"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="确定"
-            android:textColor="@color/colorPrimaryDark" />
-    </LinearLayout>
+    <!--<Button-->
+    <!--android:id="@+id/close_btn"-->
+    <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="取消" />-->
+
+    <!--<Button-->
+    <!--android:id="@+id/ok_btn"-->
+    <!--style="@style/Widget.AppCompat.Button.Borderless"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:text="确定"-->
+    <!--android:textColor="@color/colorPrimaryDark" />-->
+    <!--</LinearLayout>-->
 
 
 </LinearLayout>

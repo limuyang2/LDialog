@@ -44,20 +44,28 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="CustomLDialog Liability" />
+            android:text="CustomLDialog Library" />
 
         <Button
             android:id="@+id/ios_dialog_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="iOS风格消息弹框"
+            android:text="iOS Message Dialog"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/material_dialog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Material Message Dialog"
             android:textAllCaps="false" />
 
         <Button
             android:id="@+id/bottom_textList_dialog_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="底部列表" />
+            android:text="底部列表 BottomList"
+            android:textAllCaps="false" />
 
         <View
             android:layout_width="match_parent"
@@ -69,17 +77,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="LDialog Liability" />
+            android:text="LDialog Library" />
 
         <Button
             android:id="@+id/editText_dialog_btn"
-            android:text="输入框"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="分享" />
+            android:text="输入框 EditText"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/share_dialog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="分享 Share"
+            android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>

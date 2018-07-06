@@ -49,7 +49,7 @@
             android:background="@drawable/selector_ios_dialog_left"
             android:gravity="center"
             android:textColor="@color/ios_dialog_button_def_color"
-            android:textSize="16sp" />
+            android:textSize="15sp" />
 
         <View
             android:id="@+id/line_view"

@@ -5,12 +5,15 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.view.Gravity
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import top.limuyang2.customldialog.BottomTextListDialog
-import top.limuyang2.customldialog.MessageIOSDialog
+import top.limuyang2.customldialog.IOSMsgDialog
+import top.limuyang2.customldialog.MaterialMsgDialog
+import top.limuyang2.customldialog.adapter.BottomTextListAdapter
 import top.limuyang2.ldialog.LDialog
 import top.limuyang2.ldialog.base.*
 import top.limuyang2.ldialogdemo.R
@@ -29,22 +32,36 @@ class MainActivity : AppCompatActivity() {
         }
 
         ios_dialog_btn.setOnClickListener {
-            MessageIOSDialog.init(supportFragmentManager)
-                    .setTitle("IOS Style")
-                    .setMessage("这是一个仿IOS弹窗")
+            IOSMsgDialog.init(supportFragmentManager)
+                    .setTitle("iOS Style")
+                    .setMessage("This is iOS style dialog!")
                     .setNegativeButton("取消", View.OnClickListener {
-                        Toast.makeText(this, "关闭了弹窗", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "关闭了弹窗", Toast.LENGTH_SHORT).show()
                     }, Color.RED)
                     .setPositiveButton("确定", View.OnClickListener {
-                        Toast.makeText(this, "点击了确定", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@MainActivity, "点击了确定", Toast.LENGTH_SHORT).show()
                     })
                     .setDismissListener(object : OnDialogDismissListener() {
                         override fun onDismiss(dialog: DialogInterface?) {
-                            System.out.println("dialog dismiss")
+                            Toast.makeText(this@MainActivity, "dialog dismiss", Toast.LENGTH_SHORT).show()
                         }
                     })
                     .setCancelableOutside(true)
                     .show()
+        }
+
+        material_dialog_btn.setOnClickListener {
+            MaterialMsgDialog.init(supportFragmentManager)
+                    .setTitle("Material Style")
+                    .setMessage("This is Material Design dialog!")
+                    .setNegativeButton("Decline", View.OnClickListener {
+                        Toast.makeText(this@MainActivity, "Decline", Toast.LENGTH_SHORT).show()
+                    })
+                    .setPositiveButton("Accept", View.OnClickListener {
+                        Toast.makeText(this@MainActivity, "Accept", Toast.LENGTH_SHORT).show()
+                    })
+                    .show()
+
         }
 
         bottom_textList_dialog_btn.setOnClickListener {
@@ -56,29 +73,45 @@ class MainActivity : AppCompatActivity() {
                     .setTextList(list)
                     .setHeightScale(0.6f)
                     .setKeepHeightScale(true)
+                    .setOnItemClickListener(object : BottomTextListAdapter.OnItemClickListener {
+                        override fun onClick(view: View, position: Int) {
+                            Toast.makeText(this@MainActivity, list[position], Toast.LENGTH_SHORT).show()
+                        }
+                    })
                     .show()
         }
 
-        /*** LDialog Liability ***/
+        /*** LDialog Library ***/
         editText_dialog_btn.setOnClickListener {
             LDialog.init(supportFragmentManager)
                     .setLayoutRes(R.layout.ldialog_edittext)
-                    .setWidthScale(0.6f)
+                    .setWidthScale(1f)
+                    .setGravity(Gravity.BOTTOM)
                     .setViewHandlerListener(object : ViewHandlerListener() {
                         override fun convertView(holder: ViewHolder, dialog: BaseLDialog<*>) {
                             val editText = holder.getView<EditText>(R.id.input_editText)
-                            holder.setOnClickListener(R.id.ok_btn, View.OnClickListener {
+                            holder.setOnClickListener(R.id.sendBtn, View.OnClickListener {
                                 Toast.makeText(this@MainActivity, editText.text, Toast.LENGTH_SHORT).show()
                                 dialog.dismiss()
                             })
 
-                            holder.setOnClickListener(R.id.close_btn, View.OnClickListener {
-                                dialog.dismiss()
-                            })
                         }
                     })
                     .setNeedKeyboardEditTextId(R.id.input_editText)
                     .show()
+        }
+
+        share_dialog_btn.setOnClickListener {
+            LDialog.init(supportFragmentManager)
+                    .setLayoutRes(R.layout.ldialog_share)
+                    .setBackgroundDrawableRes(R.drawable.shape_share_dialog_bg)
+                    .setGravity(Gravity.BOTTOM)
+                    .setWidthScale(0.95f)
+                    .setHeightDp(200f)
+                    .setVerticalMargin(0.015f)
+                    .setAnimStyle(R.style.LDialogBottomAnimation)
+                    .show()
+
         }
     }
 }

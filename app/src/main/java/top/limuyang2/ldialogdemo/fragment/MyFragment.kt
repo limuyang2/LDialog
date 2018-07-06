@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_my.view.*
-import top.limuyang2.customldialog.MessageIOSDialog
+import top.limuyang2.customldialog.IOSMsgDialog
 import top.limuyang2.ldialogdemo.R
 import top.limuyang2.ldialogdemo.activity.MainActivity
 
@@ -42,7 +42,7 @@ class MyFragment : Fragment() {
 
 
         view.ios_dialog_btn.setOnClickListener {
-            MessageIOSDialog.init(childFragmentManager)
+            IOSMsgDialog.init(childFragmentManager)
                     .setTitle("IOS Style")
                     .setMessage("这是一个仿IOS弹窗")
                     .setNegativeButton("取消", View.OnClickListener {

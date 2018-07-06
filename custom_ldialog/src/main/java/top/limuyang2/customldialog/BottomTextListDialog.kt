@@ -26,6 +26,8 @@ class BottomTextListDialog : BaseLDialog<BottomTextListDialog>() {
 
     private val textList = ArrayList<String>()
 
+    private var onItemClickListener: BottomTextListAdapter.OnItemClickListener? = null
+
     override fun layoutRes(): Int = R.layout.layout_bottom_text_list_dialog
 
     override fun layoutView(): View? = null
@@ -35,7 +37,9 @@ class BottomTextListDialog : BaseLDialog<BottomTextListDialog>() {
             override fun convertView(holder: ViewHolder, dialog: BaseLDialog<*>) {
                 holder.getView<RecyclerView>(R.id.item_recyclerView).apply {
                     layoutManager = LinearLayoutManager(mContext)
-                    adapter = BottomTextListAdapter(textList)
+                    val mAdapter = BottomTextListAdapter(textList)
+                    mAdapter.setOnItemClickListener(onItemClickListener)
+                    adapter = mAdapter
                 }
             }
         }
@@ -46,6 +50,11 @@ class BottomTextListDialog : BaseLDialog<BottomTextListDialog>() {
             clear()
             addAll(textList)
         }
+        return this
+    }
+
+    fun setOnItemClickListener(onItemClickListener: BottomTextListAdapter.OnItemClickListener): BottomTextListDialog {
+        this.onItemClickListener = onItemClickListener
         return this
     }
 

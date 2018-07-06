@@ -19,7 +19,6 @@ import kotlinx.android.parcel.Parcelize
 import top.limuyang2.ldialog.R
 
 
-
 /**
  * BaseDialog(Can inherit this class)
  * Date 2018/6/26
@@ -74,8 +73,8 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
             baseParams.layoutRes > 0 -> inflater.inflate(baseParams.layoutRes, container)
-            baseParams.view != null  -> baseParams.view!!
-            else                     ->
+            baseParams.view != null -> baseParams.view!!
+            else ->
                 throw IllegalArgumentException("请先设置LayoutRes或View!")
         }
     }
@@ -91,7 +90,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             editText.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                              ?: return
+                            ?: return
                     if (imm.showSoftInput(editText, 0)) {
                         editText.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
@@ -133,9 +132,9 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                         params.width = (point.x * baseParams.widthScale).toInt()
                     }
                 }
-                baseParams.widthDp > 0f    -> params.width = dp2px(mContext, baseParams.widthDp)
+                baseParams.widthDp > 0f -> params.width = dp2px(mContext, baseParams.widthDp)
 
-                else                       -> params.width = WindowManager.LayoutParams.WRAP_CONTENT
+                else -> params.width = WindowManager.LayoutParams.WRAP_CONTENT
             }
 
             //Set dialog height
@@ -148,10 +147,12 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                         params.height = (point.y * baseParams.heightScale).toInt()
                     }
                 }
-                baseParams.heightDp > 0f    -> params.height = dp2px(mContext, baseParams.heightDp)
+                baseParams.heightDp > 0f -> params.height = dp2px(mContext, baseParams.heightDp)
 
-                else                        -> params.height = WindowManager.LayoutParams.WRAP_CONTENT
+                else -> params.height = WindowManager.LayoutParams.WRAP_CONTENT
             }
+            //Set Window verticalMargin
+            params.verticalMargin = baseParams.verticalMargin
 
             it.attributes = params
             it.setBackgroundDrawableResource(baseParams.backgroundDrawableRes)
@@ -241,6 +242,12 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         return this as T
     }
 
+    fun setVerticalMargin(@FloatRange(from = 0.0, to = 0.1) verticalMargin: Float): T {
+        baseParams.verticalMargin = verticalMargin
+        return this as T
+    }
+
+
     fun setCancelableAll(cancelable: Boolean): T {
         baseParams.cancelable = cancelable
         return this as T
@@ -304,6 +311,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             var heightDp: Float = 0f,
             var keepWidthScale: Boolean = false,
             var keepHeightScale: Boolean = false,
+            var verticalMargin: Float = 0f,
 
             var gravity: Int = Gravity.CENTER,
             var tag: String = "rgDialog",

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/Theme.AppCompat.Dialog.MinWidth"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="24dp"
+        android:orientation="vertical"
+        tools:background="@color/bottom_text_list_dialog_divide_line_color">
+
+        <!--android:textColor="@color/material_dialog_title_color"-->
+        <!--android:textSize="@dimen/material_dialog_title_size"-->
+        <!--android:textStyle="bold"-->
+        <TextView
+            style="@style/Base.DialogWindowTitle.AppCompat"
+            android:id="@+id/title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+
+            tools:text="Title" />
+
+        <TextView
+            style="@style/Theme.AppCompat.Dialog"
+            android:id="@+id/msg_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="left"
+            android:textSize="@dimen/material_dialog_msg_size"
+            tools:text="Message" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+        android:id="@+id/bottomBtnLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
+        android:gravity="right|center_vertical"
+        android:orientation="horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        tools:background="@color/bottom_text_list_dialog_divide_line_color">
+
+        <Button
+            android:id="@+id/neg_btn"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="@color/material_dialog_neg_button_color"
+            android:textSize="@dimen/material_dialog_neg_btn_text_size"
+            tools:text="Close" />
+
+        <Button
+            android:id="@+id/pos_btn"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="@color/material_dialog_pos_button_color"
+            android:textSize="@dimen/material_dialog_pos_btn_text_size"
+            tools:text="ok" />
+    </LinearLayout>
+
+</LinearLayout>
