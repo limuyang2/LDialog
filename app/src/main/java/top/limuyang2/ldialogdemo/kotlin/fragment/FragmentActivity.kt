@@ -1,4 +1,4 @@
-package top.limuyang2.ldialogdemo.fragment
+package top.limuyang2.ldialogdemo.kotlin.fragment
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

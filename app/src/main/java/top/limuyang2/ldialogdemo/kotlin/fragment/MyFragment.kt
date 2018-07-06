@@ -1,4 +1,4 @@
-package top.limuyang2.ldialogdemo.fragment
+package top.limuyang2.ldialogdemo.kotlin.fragment
 
 import android.content.Context
 import android.content.Intent
@@ -12,7 +12,7 @@ import android.widget.Toast
 import kotlinx.android.synthetic.main.fragment_my.view.*
 import top.limuyang2.customldialog.IOSMsgDialog
 import top.limuyang2.ldialogdemo.R
-import top.limuyang2.ldialogdemo.activity.MainActivity
+import top.limuyang2.ldialogdemo.kotlin.activity.MainActivity
 
 /**
  *

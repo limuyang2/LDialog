@@ -73,8 +73,8 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
             baseParams.layoutRes > 0 -> inflater.inflate(baseParams.layoutRes, container)
-            baseParams.view != null -> baseParams.view!!
-            else ->
+            baseParams.view != null  -> baseParams.view!!
+            else                     ->
                 throw IllegalArgumentException("请先设置LayoutRes或View!")
         }
     }
@@ -90,7 +90,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             editText.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
                     val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                            ?: return
+                              ?: return
                     if (imm.showSoftInput(editText, 0)) {
                         editText.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
@@ -125,31 +125,30 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             //Set dialog width
             when {
                 baseParams.widthScale > 0f -> {
-                    if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && !baseParams.keepWidthScale) {
-                        //横屏并且不保持比例
-                        params.width = WindowManager.LayoutParams.WRAP_CONTENT
-                    } else {
+                    if ((this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && baseParams.keepWidthScale)
+                        || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        //横屏并且保持比例 或者 竖屏
                         params.width = (point.x * baseParams.widthScale).toInt()
                     }
                 }
-                baseParams.widthDp > 0f -> params.width = dp2px(mContext, baseParams.widthDp)
+                baseParams.widthDp > 0f    -> params.width = dp2px(mContext, baseParams.widthDp)
 
-                else -> params.width = WindowManager.LayoutParams.WRAP_CONTENT
+//                else -> params.width = WindowManager.LayoutParams.WRAP_CONTENT
             }
 
             //Set dialog height
             when {
                 baseParams.heightScale > 0f -> {
-                    if (this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && !baseParams.keepHeightScale) {
-                        //横屏并且不保持比例
-                        params.height = WindowManager.LayoutParams.WRAP_CONTENT
-                    } else {
+                    if ((this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && baseParams.keepHeightScale)
+                        || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                        //横屏并且保持比例 或者 竖屏
+//                        params.height = WindowManager.LayoutParams.WRAP_CONTENT
                         params.height = (point.y * baseParams.heightScale).toInt()
                     }
                 }
-                baseParams.heightDp > 0f -> params.height = dp2px(mContext, baseParams.heightDp)
+                baseParams.heightDp > 0f    -> params.height = dp2px(mContext, baseParams.heightDp)
 
-                else -> params.height = WindowManager.LayoutParams.WRAP_CONTENT
+//                else -> params.height = WindowManager.LayoutParams.WRAP_CONTENT
             }
             //Set Window verticalMargin
             params.verticalMargin = baseParams.verticalMargin
@@ -314,7 +313,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             var verticalMargin: Float = 0f,
 
             var gravity: Int = Gravity.CENTER,
-            var tag: String = "rgDialog",
+            var tag: String = "LDialog",
             var cancelable: Boolean = true,
             var cancelableOutside: Boolean = true,
             var backgroundDrawableRes: Int = R.drawable.def_dialog_bg,

@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".activity.MainActivity">
+    tools:context=".kotlin.activity.MainActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,6 +90,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="分享 Share"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/topTips_dialog_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TopTips"
             android:textAllCaps="false" />
     </LinearLayout>
 </ScrollView>

@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!--缩放动画-->
+    <style name="LDialogScaleAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/scale_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/scale_out_anim</item>
+    </style>
+
+    <style name="LDialogHorizontalAnimation" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/horizontal_in_anim</item>
+        <item name="android:windowExitAnimation">@anim/horizontal_out_anim</item>
+    </style>
+
 </resources>

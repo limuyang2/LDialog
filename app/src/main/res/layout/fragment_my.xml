@@ -34,4 +34,13 @@
         android:text="iOS风格消息弹框"
         android:textAllCaps="false" />
 
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="Use the same as Activity"
+        android:textColor="#333333"
+        android:textSize="16sp" />
+
 </LinearLayout>

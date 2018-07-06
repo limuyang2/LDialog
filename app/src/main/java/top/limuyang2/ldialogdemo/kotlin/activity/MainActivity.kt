@@ -1,9 +1,10 @@
-package top.limuyang2.ldialogdemo.activity
+package top.limuyang2.ldialogdemo.kotlin.activity
 
 import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.os.Handler
 import android.support.v7.app.AppCompatActivity
 import android.view.Gravity
 import android.view.View
@@ -17,7 +18,7 @@ import top.limuyang2.customldialog.adapter.BottomTextListAdapter
 import top.limuyang2.ldialog.LDialog
 import top.limuyang2.ldialog.base.*
 import top.limuyang2.ldialogdemo.R
-import top.limuyang2.ldialogdemo.fragment.FragmentActivity
+import top.limuyang2.ldialogdemo.kotlin.fragment.FragmentActivity
 
 
 class MainActivity : AppCompatActivity() {
@@ -31,10 +32,13 @@ class MainActivity : AppCompatActivity() {
             finish()
         }
 
+
+        /*** CustomLDialog Library ***/
         ios_dialog_btn.setOnClickListener {
             IOSMsgDialog.init(supportFragmentManager)
                     .setTitle("iOS Style")
                     .setMessage("This is iOS style dialog!")
+                    .setAnimStyle(R.style.LDialogScaleAnimation)
                     .setNegativeButton("取消", View.OnClickListener {
                         Toast.makeText(this@MainActivity, "关闭了弹窗", Toast.LENGTH_SHORT).show()
                     }, Color.RED)
@@ -107,9 +111,35 @@ class MainActivity : AppCompatActivity() {
                     .setBackgroundDrawableRes(R.drawable.shape_share_dialog_bg)
                     .setGravity(Gravity.BOTTOM)
                     .setWidthScale(0.95f)
-                    .setHeightDp(200f)
                     .setVerticalMargin(0.015f)
                     .setAnimStyle(R.style.LDialogBottomAnimation)
+                    .setViewHandlerListener(object : ViewHandlerListener() {
+                        override fun convertView(holder: ViewHolder, dialog: BaseLDialog<*>) {
+                            holder.setOnClickListener(R.id.cancelBtn, View.OnClickListener {
+                                dialog.dismiss()
+                            })
+                        }
+                    })
+                    .show()
+
+        }
+
+        topTips_dialog_btn.setOnClickListener {
+            val handler = Handler()
+            val dialog = LDialog.init(supportFragmentManager)
+                    .setTag("topTips")
+                    .setLayoutRes(R.layout.ldialog_top_tips)
+                    .setGravity(Gravity.TOP)
+                    .setWidthScale(1f)
+                    .setKeepWidthScale(true)
+                    .setAnimStyle(R.style.LDialogHorizontalAnimation)
+                    .setViewHandlerListener(object : ViewHandlerListener() {
+                        override fun convertView(holder: ViewHolder, dialog: BaseLDialog<*>) {
+                            handler.postDelayed({
+                                                    dialog.dismiss()
+                                                }, 3000)
+                        }
+                    })
                     .show()
 
         }
