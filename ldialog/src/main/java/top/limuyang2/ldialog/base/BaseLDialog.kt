@@ -50,6 +50,8 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
 
     protected abstract fun viewHandler(): ViewHandlerListener?
 
+    open fun initView(view: View){}
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         mContext = context
@@ -82,6 +84,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewHandlerListener?.convertView(ViewHolder.create(view), this)
+        initView(view)
 
         //Set open Keyboard
         if (this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT && baseParams.needKeyboardViewId != 0) {
