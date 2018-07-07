@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 # LDialog
-一个基于Goolegle推荐的DialogFragment封装的的库，根据自身业务提取封装，本库全部使用```kotlin```编写，```java```亦可调用，能满足大部分的项目需求。本项目准则即是遵守最大化的自由程度。  
+一个基于Goolegle推荐的DialogFragment封装的的库，根据自身业务提取封装，本库全部使用```kotlin```编写，```java```亦可调用，能满足大部分的项目需求，能在Activity与Fragment中使用。本项目准则即是遵守最大化的自由程度。  
 
 本库目前已具备的特点如下：
 
@@ -50,7 +50,9 @@ dependencies {
 ```
 
 ## 简单使用
-LDialog与CustonLDialog均继承于BaseLDialog类
+LDialog与CustonLDialog均继承于BaseLDialog类。  
+
+>init()中的参数，```Activity```中使用```supportFragmentManager```，```Fragment```中使用```childFragmentManager```  
 
 ### CustonLDialog 使用方式
 
@@ -62,7 +64,7 @@ LDialog与CustonLDialog均继承于BaseLDialog类
 以下以```MaterialMsgDialog```为示例：
 ```kotlin
 //koltin
-MaterialMsgDialog.init(supportFragmentManager)
+MaterialMsgDialog.init(supportFragmentManager) //Freagment中使用childFragmentManager
 	.setTitle("Material Style")
 	.setMessage("This is Material Design dialog!")
 	.setNegativeButton("Decline", View.OnClickListener {
