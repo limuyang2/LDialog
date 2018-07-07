@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
 # LDialog
-一个基于Goolegle推荐的DialogFragment封装的的库，根据自身业务提取封装，本库全部使用```kotlin```编写，```java```亦可调用，能满足大部分的项目需求，能在Activity与Fragment中使用。本项目准则即是遵守最大化的自由程度。  
+一个基于Google推荐的DialogFragment封装的的库，根据自身业务提取封装，本库全部使用```kotlin```编写，```java```亦可调用，能满足大部分的项目需求，能在Activity与Fragment中使用。本项目准则即是遵守最大化的自由程度。  
 
 本库目前已具备的特点如下：
 
