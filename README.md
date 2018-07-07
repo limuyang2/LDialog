@@ -123,7 +123,7 @@ LDialog.init(supportFragmentManager)
 | setLayoutRes             | 设置布局资源【优先级高于setLayoutView】【仅LDialog，必须】 |
 | setLayoutView            | 设置布局view（不推荐使用）【仅LDialog，必须】                |
 | * setViewHandlerListener | （重要）设置布局中控件的属性。如果【需要】考虑横竖屏旋转，则控件的相关属性必须在此设置。建议对布局中控件的设置均写在此处。【仅LDialog，必须】 |
-| 通用方法                 |                                                              |
+| 通用方法（BaseLDialog） |                                                              |
 |setBackgroundDrawableRes|弹窗背景资源文件id|
 | setTag                   | DialogFragment的标签                                         |
 | setDismissListener       | 弹窗的关闭监听                                            |
@@ -142,7 +142,7 @@ LDialog.init(supportFragmentManager)
 |show|显示Dialog|
 
 ## 高级使用
-如果以上仍然无法满足你们的需求，那可以直接继承```BaseLDialog```类。  
+如果以上仍然无法满足你们的需求，那可以直接继承```BaseLDialog```类，同时也就具备了通用方法。具体可参考```CustonLDialog```中的三个弹窗类。  
 基本写法如下：
 ```kotlin
 class ExKotlinLdialog : BaseLDialog<ExKotlinLdialog>() {
