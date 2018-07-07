@@ -1,4 +1,4 @@
-package top.limuyang2.ldialogdemo.kotlin;
+package top.limuyang2.ldialogdemo.java;
 
 import android.view.View;
 
@@ -10,7 +10,7 @@ import top.limuyang2.ldialog.base.ViewHandlerListener;
 import top.limuyang2.ldialog.base.ViewHolder;
 import top.limuyang2.ldialogdemo.R;
 
-public class ExLdialog extends BaseLDialog<ExLdialog> {
+public class ExJavaLdialog extends BaseLDialog<ExJavaLdialog> {
 
     @Override
     protected int layoutRes() {
@@ -25,7 +25,7 @@ public class ExLdialog extends BaseLDialog<ExLdialog> {
 
     /**
      * 必须
-     * 如果【需要】考虑横竖屏选择，则控件的相关属性在此设置
+     * 如果【需要】考虑横竖屏旋转，则控件的相关属性在此设置
      * @return
      */
     @Nullable

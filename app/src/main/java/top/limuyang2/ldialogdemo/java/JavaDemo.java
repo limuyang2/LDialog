@@ -12,6 +12,7 @@ import android.widget.Toast;
 import org.jetbrains.annotations.NotNull;
 
 import top.limuyang2.customldialog.IOSMsgDialog;
+import top.limuyang2.customldialog.MaterialMsgDialog;
 import top.limuyang2.ldialog.LDialog;
 import top.limuyang2.ldialog.base.BaseLDialog;
 import top.limuyang2.ldialog.base.OnDialogDismissListener;
@@ -49,6 +50,23 @@ public class JavaDemo extends AppCompatActivity {
                     }
                 })
                 .setCancelableOutside(true)
+                .show();
+
+        MaterialMsgDialog.Companion.init(getSupportFragmentManager())
+                .setTitle("Material Style")
+                .setMessage("This is Material Design dialog!")
+                .setNegativeButton("Decline", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(JavaDemo.this, "Decline", Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setPositiveButton("Accept", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(JavaDemo.this, "Accept", Toast.LENGTH_SHORT).show();
+                    }
+                })
                 .show();
 
 
