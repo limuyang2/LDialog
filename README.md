@@ -84,19 +84,19 @@ MaterialMsgDialog.Companion.init(getSupportFragmentManager())
 		@Override
 		public void onClick(View v) {
 			Toast.makeText(JavaDemo.this, "Decline", Toast.LENGTH_SHORT).show()
-        }
-    })
-    .setPositiveButton("Accept", new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Toast.makeText(JavaDemo.this, "Accept", Toast.LENGTH_SHORT).show()
-        }
-    })
-    .show();
+        	}
+    	})
+    	.setPositiveButton("Accept", new View.OnClickListener() {
+        	@Override
+        	public void onClick(View v) {
+            		Toast.makeText(JavaDemo.this, "Accept", Toast.LENGTH_SHORT).show()
+        	}
+    	})
+    	.show();
 ```
 
 ### LDialog 使用方式 (主要使用方式)
-用对外提供使用 layoutRes 自定义布局。  
+用于对外提供使用 layoutRes 自定义布局。  
 示例如下：
 ```kotlin
 //kotlin
