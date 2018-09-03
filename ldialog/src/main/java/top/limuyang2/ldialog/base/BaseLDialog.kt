@@ -135,8 +135,6 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                     }
                 }
                 baseParams.widthDp > 0f    -> params.width = dp2px(mContext, baseParams.widthDp)
-
-//                else -> params.width = WindowManager.LayoutParams.WRAP_CONTENT
             }
 
             //Set dialog height
@@ -145,13 +143,10 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                     if ((this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && baseParams.keepHeightScale)
                         || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                         //横屏并且保持比例 或者 竖屏
-//                        params.height = WindowManager.LayoutParams.WRAP_CONTENT
                         params.height = (point.y * baseParams.heightScale).toInt()
                     }
                 }
                 baseParams.heightDp > 0f    -> params.height = dp2px(mContext, baseParams.heightDp)
-
-//                else -> params.height = WindowManager.LayoutParams.WRAP_CONTENT
             }
             //Set Window verticalMargin
             params.verticalMargin = baseParams.verticalMargin
@@ -171,7 +166,6 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
 
     override fun onDismiss(dialog: DialogInterface?) {
         super.onDismiss(dialog)
-        System.out.println("onDismiss")
         onDialogDismissListener?.onDismiss(dialog)
     }
 
