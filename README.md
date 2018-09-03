@@ -1,35 +1,39 @@
 [![](https://jitpack.io/v/limuyang2/LDialog.svg)](https://jitpack.io/#limuyang2/LDialog)
 [![License](https://img.shields.io/badge/license-Apache%202-4EB1BA.svg)](https://www.apache.org/licenses/LICENSE-2.0.html)
 
+
 # LDialog
-一个基于Google推荐的DialogFragment封装的的库，根据自身业务提取封装，本库全部使用```kotlin```编写，```java```亦可调用，能满足大部分的项目需求，能在Activity与Fragment中使用。本项目准则即是遵守最大化的自由程度。  
 
-本库目前已具备的特点如下：
+### [中文](https://github.com/limuyang2/LDialog/README_CN.md)
 
-* 横竖屏旋转保存Dialog属性状态（并且能保持DialogFragment的事件状态，例如点击事件）
-* 完全的自定义界面
-* 丰富的界面属性设置
-* 完美的键盘自动弹出(并非使用延迟的方法)
+A library based on Google's recommended DialogFragment package, according to its own business extraction package, the library is written using ```kotlin```, ```java``` can also be called, can meet most project needs, can Used in Activity and Fragment. The guiding principle of this project is to adhere to the maximum degree of freedom.  
 
-> 使用建议：
-> DialogFragment相对于AlertDialog有很多优点。但对于只需要非常简单信息提示、仅需要原生样式，以及不考虑横竖屏的情况下，推荐使用更简单的AlertDialog，请不要把简单问题复杂化。DialogFragment适合用有UI要求、使用要求的情况下。  
+The library currently has the following features:  
 
-> 源码说明：  
-> 如果你还没上手koltin，建议学习使用。本库的环境版本如下：  
-> * kotlin 1.2.51
+* Rotate the vertical and vertical screens to save the Dialog property state (and maintain the event state of the DialogFragment, such as a click event)
+* Complete custom interface
+* Rich interface property settings
+* Perfect keyboard automatically pops up (not using delay method)
+
+> Recommendations：
+> DialogFragment has many advantages over AlertDialog. However, for simple information prompts, only native styles, and no horizontal and vertical rotation is required, a simpler AlertDialog is recommended. Please don't complicate the simple question.  
+
+> Source description：  
+> If you haven't gotten started with koltin, it is recommended to learn to use it. The environment version of this library is as follows：  
+> * kotlin 1.2.61
 > * Android support 27.1.1
 
-## 预览
+## Preview
 ![](https://github.com/limuyang2/LDialog/blob/master/screenshot/kap.gif)
-> 由于录屏的限制无法录制横竖切换情况。请下载demo体验
+> Due to the limitations of the screen. Please download the demo experience
 
-### demo下载地址
+### Demo download link
 [demo apk](https://github.com/limuyang2/LDialog/blob/master/apk/app-release.apk)
 
-## 获取
-本库分为必须导入的```LDialog```和非必须的```CustomLDialog```。  
-```LDialog```为基础库；```CustomLDialog```中包含了自定义的样式，不需要可以不导入。  
-先在 build.gradle 的 repositories 添加：  
+## Obtain
+This library is divided into the necessary ```LDialog`` and non-essential ```CustomLDialog```.
+```LDialog``` is the base library; ```CustomLDialog``` contains custom styles, and you don't need to import them if you don't need them.
+First add in the repositories of build.gradle : 
 ```gradle
 allprojects {
 	repositories {
@@ -39,32 +43,32 @@ allprojects {
 }
 ```
 
-再在dependencies添加：  
+Add in dependencies：  
 ```gradle
 dependencies {
-	//必须导入
+	//Must be imported
 	implementation 'com.github.limuyang2.LDialog:ldialog:1.0'
-	//3种自定义样式，不使用就不导入
+	//3 custom styles, you don't need to import them if you don't need them
 	implementation 'com.github.limuyang2.LDialog:custom_ldialog:1.0'
 }
 ```
 
-## 简单使用
-LDialog与CustonLDialog均继承于BaseLDialog类。  
+## Simple to use
+Both LDialog and CustonLDialog inherit from the BaseLDialog class.  
 
->init()中的参数，```Activity```中使用```supportFragmentManager```，```Fragment```中使用```childFragmentManager```  
+>The parameters in init(), ```Activity``` use ```supportFragmentManager```, ```Fragment``` using ```childFragmentManager```  
 
-### CustonLDialog 使用方式
+### CustonLDialog Use
 
-目前里面包含3种自定义样式：
+There are currently 3 custom styles:
 * IOSMsgDialog
 * MaterialMsgDialog
 * BottomTextListDialog
 
-以下以```MaterialMsgDialog```为示例：
+The following is an example of ```MaterialMsgDialog```:
 ```kotlin
 //koltin
-MaterialMsgDialog.init(supportFragmentManager) //Freagment中使用childFragmentManager
+MaterialMsgDialog.init(supportFragmentManager) //Freagment using childFragmentManager
 	.setTitle("Material Style")
 	.setMessage("This is Material Design dialog!")
 	.setNegativeButton("Decline", View.OnClickListener {
@@ -95,9 +99,10 @@ MaterialMsgDialog.Companion.init(getSupportFragmentManager())
     	.show();
 ```
 
-### LDialog 使用方式 (主要使用方式)
-用于对外提供使用 layoutRes 自定义布局。  
-示例如下：
+### LDialog use (mainly used)
+Used to provide a custom layout using layoutRes.  
+Examples：
+
 ```kotlin
 //kotlin
 LDialog.init(supportFragmentManager)
@@ -116,37 +121,37 @@ LDialog.init(supportFragmentManager)
     })
     .show()
 ```
-[Java使用请参考项目下的 JavaDemo.java](https://github.com/limuyang2/LDialog/blob/master/app/src/main/java/top/limuyang2/ldialogdemo/java/JavaDemo.java)
+[For Java usage, please refer to JavaDemo.java under the project.](https://github.com/limuyang2/LDialog/blob/master/app/src/main/java/top/limuyang2/ldialogdemo/java/JavaDemo.java)
 
-### 方法说明
+### Method description
 
-| 方法名                   | 说明                                                         |
+| Method name                   | Description                                                         |
 | ------------------------ | ------------------------------------------------------------ |
-| setLayoutRes             | 设置布局资源【优先级高于setLayoutView】【仅LDialog，必须】 |
-| setLayoutView            | 设置布局view（不推荐使用）【仅LDialog，必须】                |
-| * setViewHandlerListener | （重要）设置布局中控件的属性。如果【需要】考虑横竖屏旋转，则控件的相关属性必须在此设置。建议对布局中控件的设置均写在此处。【仅LDialog，必须】 |
+| setLayoutRes             | Set layout resources 【priority is higher than setLayoutView】【LDialog only, must】 |
+| setLayoutView            | Set layout view (not recommended)【LDialog only，must】                |
+| * setViewHandlerListener | (Important) Set the properties of the controls in the layout. If need to consider horizontal and vertical rotation, the relevant properties of the control must be set here. It is recommended that the settings for the controls in the layout be written here.【LDialog only, must】 |
 |||
-| 通用方法（BaseLDialog） |                                                              |
-|setBackgroundDrawableRes|弹窗背景资源文件id|
-| setTag                   | DialogFragment的标签                                         |
-| setDismissListener       | 弹窗的关闭监听                                            |
-| setGravity               | 窗体位置（例：Gravity.CENTER    Gravity.TOP）                |
-| setWidthScale            | 占屏幕宽度的比例（范围0.0 - 1.0，当为1.0时即为铺满）【优先级高于setWidthDp】 |
-|setWidthDp|Dialog的宽度，单位dp|
-|setHeightScale|占屏幕高度的比例（范围0.0 - 1.0）【优先级高于setHeightDp】|
-|setHeightDp|Dialog的高度，单位dp|
-|setKeepWidthScale|横屏时，是否保持设置的宽度比例【仅当设置了宽度比例setWidthScale后，才生效】（默认false）|
-|setKeepHeightScale|横屏时，是否保持设置的高度比例【仅当设置了高度比例setHeightScale后，才生效】（默认false）|
-|setVerticalMargin|设置垂直方向的Margin值（范围0.0 - 0.1）|
-|setCancelableAll|设置是否可以点击dialog外及返回键关闭dialog|
-|setCancelableOutside|设置是否可以点击dialog外关闭dialog（返回键不受影响）|
-|setAnimStyle|动画Style资源文件id|
-|setNeedKeyboardEditTextId|设置需要自动弹出键盘的控件id，必须是EditText类型的控件|
-|show|显示Dialog|
+| General method（BaseLDialog） |                                                              |
+|setBackgroundDrawableRes|Dialog Background resource file id|
+| setTag                   | DialogFragment tag                                       |
+| setDismissListener       | Dialog off Listener                                           |
+| setGravity               | Dialog Gravity（Examples：Gravity.CENTER    Gravity.TOP）        |
+| setWidthScale            | Proportion of screen width(range 0.0 - 1.0, when it is 1.0, it is full)【Priority is higher than ```setWidthDp```】 |
+|setWidthDp|Dialog width, unit dp|
+|setHeightScale|Proportion of screen height (range 0.0 - 1.0)【Priority is higher than ```setHeightDp```】|
+|setHeightDp|Dialog height, unit dp|
+|setKeepWidthScale|Whether to maintain the set width ratio when horizontally【Only takes effect when the width ratio ```setWidthScale``` is set】(default false)|
+|setKeepHeightScale|Whether to maintain the set height ratio when the screen is horizontal【Only takes effect when the height ratio ```setHeightScale``` is set】(default false)|
+|setVerticalMargin|Set the Margin value in the vertical direction (range 0.0 - 0.1)|
+|setCancelableAll|Set whether you can click outside the dialog and Back key to close the dialog|
+|setCancelableOutside|Set whether you can click outside the dialog to close the dialog (the Back key is not affected)|
+|setAnimStyle|Animated Style resource file id|
+|setNeedKeyboardEditTextId|Set the control id that needs to automatically pop up the keyboard. It must be a control of type EditText.|
+|show|Show Dialog|
 
-## 高级使用
-如果以上仍然无法满足你们的需求，那可以直接继承```BaseLDialog```类，同时也就具备了通用方法。具体可参考```CustonLDialog```中的三个弹窗类。  
-基本写法如下：
+## Advanced use
+If the above still can not meet your needs, you can directly inherit the ```BaseLDialog``` class, and also have a general method. For details, please refer to the three Dialog classes in ```CustonLDialog``.  
+The basic writing is as follows：
 ```kotlin
 class ExKotlinLdialog : BaseLDialog<ExKotlinLdialog>() {
 
@@ -155,8 +160,8 @@ class ExKotlinLdialog : BaseLDialog<ExKotlinLdialog>() {
     override fun layoutView(): View? = null
 
     /**
-     * 必须
-     * 如果【需要】考虑横竖屏旋转，则控件的相关属性在此设置
+     * Must
+     * If [need] to consider horizontal and vertical rotation, the relevant properties of the control are set here.
      * @return
      */
     override fun viewHandler(): ViewHandlerListener? {
@@ -168,8 +173,8 @@ class ExKotlinLdialog : BaseLDialog<ExKotlinLdialog>() {
     }
 
     /**
-     * 可选
-     * 如果【不】考虑横竖屏旋转，也可以在此设置控件属性
+     * Optional
+     * If you don't consider the horizontal and vertical rotation, you can also set the control properties here.
      * @param view
      */
     override fun initView(view: View) {
@@ -177,7 +182,7 @@ class ExKotlinLdialog : BaseLDialog<ExKotlinLdialog>() {
     }
 }
 ```
-[Java使用请参考项目下的 ExJavaLdialog.java](https://github.com/limuyang2/LDialog/blob/master/app/src/main/java/top/limuyang2/ldialogdemo/java/ExJavaLdialog.java)
+[Java use please refer to ExJavaLdialog.java under the project](https://github.com/limuyang2/LDialog/blob/master/app/src/main/java/top/limuyang2/ldialogdemo/java/ExJavaLdialog.java)
 
 
 ## License
