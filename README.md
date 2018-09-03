@@ -4,7 +4,7 @@
 
 # LDialog
 
-### [中文](https://github.com/limuyang2/LDialog/README_CN.md)
+### [中文](https://github.com/limuyang2/LDialog/blob/master/README_CN.md)
 
 A library based on Google's recommended DialogFragment package, according to its own business extraction package, the library is written using ```kotlin```, ```java``` can also be called, can meet most project needs, can Used in Activity and Fragment. The guiding principle of this project is to adhere to the maximum degree of freedom.  
 
