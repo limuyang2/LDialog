@@ -43,9 +43,9 @@ allprojects {
 ```gradle
 dependencies {
 	//必须导入
-	implementation 'com.github.limuyang2.LDialog:ldialog:1.0.1'
+	implementation 'com.github.limuyang2.LDialog:ldialog:1.0.2'
 	//3种自定义样式，不使用就不导入
-	implementation 'com.github.limuyang2.LDialog:custom_ldialog:1.0.1'
+	implementation 'com.github.limuyang2.LDialog:custom_ldialog:1.0.2'
 }
 ```
 
