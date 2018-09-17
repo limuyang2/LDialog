@@ -47,9 +47,9 @@ Add in dependencies：
 ```gradle
 dependencies {
 	//Must be imported
-	implementation 'com.github.limuyang2.LDialog:ldialog:1.0.1'
+	implementation 'com.github.limuyang2.LDialog:ldialog:1.0.2'
 	//3 custom styles, you don't need to import them if you don't need them
-	implementation 'com.github.limuyang2.LDialog:custom_ldialog:1.0.1'
+	implementation 'com.github.limuyang2.LDialog:custom_ldialog:1.0.2'
 }
 ```
 
