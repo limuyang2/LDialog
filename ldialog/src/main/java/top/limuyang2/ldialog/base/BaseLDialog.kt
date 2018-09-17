@@ -50,7 +50,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
 
     protected abstract fun viewHandler(): ViewHandlerListener?
 
-    open fun initView(view: View){}
+    open fun initView(view: View) {}
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -75,8 +75,8 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
             baseParams.layoutRes > 0 -> inflater.inflate(baseParams.layoutRes, container)
-            baseParams.view != null  -> baseParams.view!!
-            else                     ->
+            baseParams.view != null -> baseParams.view!!
+            else ->
                 throw IllegalArgumentException("请先设置LayoutRes或View!")
         }
     }
@@ -134,7 +134,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                         params.width = (point.x * baseParams.widthScale).toInt()
                     }
                 }
-                baseParams.widthDp > 0f    -> params.width = dp2px(mContext, baseParams.widthDp)
+                baseParams.widthDp > 0f -> params.width = dp2px(mContext, baseParams.widthDp)
             }
 
             //Set dialog height
@@ -146,13 +146,17 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                         params.height = (point.y * baseParams.heightScale).toInt()
                     }
                 }
-                baseParams.heightDp > 0f    -> params.height = dp2px(mContext, baseParams.heightDp)
+                baseParams.heightDp > 0f -> params.height = dp2px(mContext, baseParams.heightDp)
             }
             //Set Window verticalMargin
             params.verticalMargin = baseParams.verticalMargin
 
             it.attributes = params
-            it.setBackgroundDrawableResource(baseParams.backgroundDrawableRes)
+            if (baseParams.backgroundDrawableRes == 0) {
+                it.setBackgroundDrawable(null)
+            } else {
+                it.setBackgroundDrawableResource(baseParams.backgroundDrawableRes)
+            }
             it.setWindowAnimations(baseParams.animStyle)
         }
 
