@@ -179,6 +179,11 @@ class ExKotlinLdialog : BaseLDialog<ExKotlinLdialog>() {
 ```
 [Java使用请参考项目下的 ExJavaLdialog.java](https://github.com/limuyang2/LDialog/blob/master/app/src/main/java/top/limuyang2/ldialogdemo/java/ExJavaLdialog.java)
 
+## 混淆
+如果你开启了 ProGuard 混淆，需要添加以下配置：  
+```
+-keep class top.limuyang2.ldialog.base.** { *; }
+```
 
 ## License
 ```

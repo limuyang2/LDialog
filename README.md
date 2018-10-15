@@ -184,6 +184,11 @@ class ExKotlinLdialog : BaseLDialog<ExKotlinLdialog>() {
 ```
 [Java use please refer to ExJavaLdialog.java under the project](https://github.com/limuyang2/LDialog/blob/master/app/src/main/java/top/limuyang2/ldialogdemo/java/ExJavaLdialog.java)
 
+## ProGuard
+If you are using ProGuard you might need to add the following option:  
+```
+-keep class top.limuyang2.ldialog.base.** { *; }
+```
 
 ## License
 ```
