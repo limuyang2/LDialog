@@ -1,9 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'com.github.dcendents.android-maven'
 
-group='top.limuyang2.customldialog'
 
 android {
     compileSdkVersion 28
@@ -32,10 +30,10 @@ dependencies {
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "androidx.appcompat:appcompat:1.0.0"
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'androidx.test:runner:1.1.0-beta02'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-beta02'
     api "androidx.recyclerview:recyclerview:1.0.0"
-    api project(path: ':ldialog')
+    api project(':ldialog')
 }
 
 repositories {
