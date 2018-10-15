@@ -6,6 +6,8 @@
 
 ### [中文](https://github.com/limuyang2/LDialog/blob/master/README_CN.md)
 
+(suppor Android X)
+
 A library based on Google's recommended DialogFragment package, according to its own business extraction package, the library is written using ```kotlin```, ```java``` can also be called, can meet most project needs, can Used in Activity and Fragment. The guiding principle of this project is to adhere to the maximum degree of freedom.  
 
 The library currently has the following features:  
@@ -53,7 +55,18 @@ dependencies {
 }
 ```
 
+**if you use Android X，Please use the following:**  
+```gradle
+dependencies {
+	//Must be imported
+	implementation 'com.github.limuyang2.LDialog:ldialog:1.0.2_androidx'
+	//3 custom styles, you don't need to import them if you don't need them
+	implementation 'com.github.limuyang2.LDialog:custom_ldialog:1.0.2_androidx'
+}
+```
+
 ## Simple to use
+
 Both LDialog and CustonLDialog inherit from the BaseLDialog class.  
 
 >The parameters in init(), ```Activity``` use ```supportFragmentManager```, ```Fragment``` using ```childFragmentManager```  
