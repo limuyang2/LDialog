@@ -1,9 +1,8 @@
 package top.limuyang2.ldialog
 
-
-import android.support.annotation.LayoutRes
-import android.support.v4.app.FragmentManager
 import android.view.View
+import androidx.annotation.LayoutRes
+import androidx.fragment.app.FragmentManager
 import top.limuyang2.ldialog.base.BaseLDialog
 import top.limuyang2.ldialog.base.ViewHandlerListener
 

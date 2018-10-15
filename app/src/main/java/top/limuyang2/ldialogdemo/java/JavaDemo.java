@@ -3,14 +3,14 @@ package top.limuyang2.ldialogdemo.java;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Toast;
 
 import org.jetbrains.annotations.NotNull;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import top.limuyang2.customldialog.IOSMsgDialog;
 import top.limuyang2.customldialog.MaterialMsgDialog;
 import top.limuyang2.ldialog.LDialog;

@@ -7,14 +7,15 @@ import android.content.res.Configuration
 import android.graphics.Point
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.annotation.DrawableRes
-import android.support.annotation.FloatRange
-import android.support.annotation.LayoutRes
-import android.support.annotation.StyleRes
-import android.support.v4.app.FragmentManager
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.annotation.DrawableRes
+import androidx.annotation.FloatRange
+import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.parcel.Parcelize
 import top.limuyang2.ldialog.R
 
@@ -25,7 +26,7 @@ import top.limuyang2.ldialog.R
  * @author limuyang
  */
 @Suppress("UNCHECKED_CAST")
-abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFragment() {
+abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
 
     protected var baseParams: BaseDialogParams
 
