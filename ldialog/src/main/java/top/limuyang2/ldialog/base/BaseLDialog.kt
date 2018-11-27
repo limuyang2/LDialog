@@ -63,7 +63,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
 
         //Restore UI status
         savedInstanceState?.let {
-            baseParams = it.getParcelable(KEY_PARAMS)
+            baseParams = it.getParcelable(KEY_PARAMS) ?: BaseDialogParams()
             viewHandlerListener = savedInstanceState.getParcelable(KEY_VIEW_HANDLER)
             onDialogDismissListener = savedInstanceState.getParcelable(KEY_DISMISS_LISTENER)
         }
@@ -93,9 +93,12 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
 
             editText.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                              ?: return
-                    if (imm.showSoftInput(editText, 0)) {
+                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                            ?: return
+                    editText.isFocusable = true
+                    editText.isFocusableInTouchMode = true
+                    editText.requestFocus()
+                    if (imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)) {
                         editText.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
                 }
@@ -130,7 +133,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
             when {
                 baseParams.widthScale > 0f -> {
                     if ((this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && baseParams.keepWidthScale)
-                        || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                         //横屏并且保持比例 或者 竖屏
                         params.width = (point.x * baseParams.widthScale).toInt()
                     }
@@ -142,7 +145,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
             when {
                 baseParams.heightScale > 0f -> {
                     if ((this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && baseParams.keepHeightScale)
-                        || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                         //横屏并且保持比例 或者 竖屏
                         params.height = (point.y * baseParams.heightScale).toInt()
                     }
@@ -170,6 +173,13 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
+        if (baseParams.needKeyboardViewId != 0) {
+            val editText = view?.findViewById<EditText>(baseParams.needKeyboardViewId)
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                    ?: return
+            imm.hideSoftInputFromWindow(editText?.windowToken, 0)
+        }
+
         super.onDismiss(dialog)
         onDialogDismissListener?.onDismiss(dialog)
     }
