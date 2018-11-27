@@ -92,12 +92,12 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
 
             editText.viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
-                    val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-                              ?: return
+                    val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                            ?: return
                     editText.isFocusable = true
                     editText.isFocusableInTouchMode = true
                     editText.requestFocus()
-                    if (imm.showSoftInput(editText, 0)) {
+                    if (imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)) {
                         editText.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
                 }
@@ -172,9 +172,12 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
-        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager ?: return
-        //noinspection ConstantConditions
-        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
+        if (baseParams.needKeyboardViewId != 0) {
+            val editText = view?.findViewById<EditText>(baseParams.needKeyboardViewId)
+            val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
+                    ?: return
+            imm.hideSoftInputFromWindow(editText?.windowToken, 0)
+        }
         super.onDismiss(dialog)
         onDialogDismissListener?.onDismiss(dialog)
     }
