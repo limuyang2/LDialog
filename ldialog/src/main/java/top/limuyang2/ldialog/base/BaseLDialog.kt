@@ -94,6 +94,9 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
                 override fun onGlobalLayout() {
                     val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                               ?: return
+                    editText.isFocusable = true
+                    editText.isFocusableInTouchMode = true
+                    editText.requestFocus()
                     if (imm.showSoftInput(editText, 0)) {
                         editText.viewTreeObserver.removeOnGlobalLayoutListener(this)
                     }
@@ -169,6 +172,9 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
     }
 
     override fun onDismiss(dialog: DialogInterface?) {
+        val imm = activity?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager ?: return
+        //noinspection ConstantConditions
+        imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0)
         super.onDismiss(dialog)
         onDialogDismissListener?.onDismiss(dialog)
     }
