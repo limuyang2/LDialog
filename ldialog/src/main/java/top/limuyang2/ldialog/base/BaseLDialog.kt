@@ -7,10 +7,7 @@ import android.content.res.Configuration
 import android.graphics.Point
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.annotation.DrawableRes
-import android.support.annotation.FloatRange
-import android.support.annotation.LayoutRes
-import android.support.annotation.StyleRes
+import android.support.annotation.*
 import android.support.v4.app.FragmentManager
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -283,7 +280,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
      * @param id Int EditTextView ID
      * @return T
      */
-    fun setNeedKeyboardEditTextId(id: Int): T {
+    fun setNeedKeyboardEditTextId(@IdRes id: Int): T {
         baseParams.needKeyboardViewId = id
         return this as T
     }

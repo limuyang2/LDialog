@@ -125,10 +125,10 @@ class IOSMsgDialog : BaseLDialog<IOSMsgDialog>() {
 
     companion object {
         fun init(fragmentManager: FragmentManager): IOSMsgDialog {
-            val dialog = IOSMsgDialog()
-            dialog.setFragmentManager(fragmentManager)
-            dialog.setBackgroundDrawableRes(R.drawable.shape_ios_dialog_bg)
-            return dialog
+            return IOSMsgDialog().apply {
+                setFragmentManager(fragmentManager)
+                setBackgroundDrawableRes(R.drawable.shape_ios_dialog_bg)
+            }
         }
     }
 

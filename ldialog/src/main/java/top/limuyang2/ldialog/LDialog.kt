@@ -39,9 +39,7 @@ class LDialog : BaseLDialog<LDialog>() {
 
     companion object {
         fun init(fragmentManager: FragmentManager): LDialog {
-            val dialog = LDialog()
-            dialog.setFragmentManager(fragmentManager)
-            return dialog
+            return LDialog().apply { setFragmentManager(fragmentManager) }
         }
     }
 }

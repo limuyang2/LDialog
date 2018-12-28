@@ -138,9 +138,7 @@ class MaterialMsgDialog : BaseLDialog<MaterialMsgDialog>() {
 
     companion object {
         fun init(fragmentManager: FragmentManager): MaterialMsgDialog {
-            val dialog = MaterialMsgDialog()
-            dialog.setFragmentManager(fragmentManager)
-            return dialog
+            return MaterialMsgDialog().apply { setFragmentManager(fragmentManager) }
         }
     }
 

@@ -60,9 +60,7 @@ class BottomTextListDialog : BaseLDialog<BottomTextListDialog>() {
 
     companion object {
         fun init(fragmentManager: FragmentManager): BottomTextListDialog {
-            val dialog = BottomTextListDialog()
-            dialog.setFragmentManager(fragmentManager)
-            return dialog
+            return BottomTextListDialog().apply { setFragmentManager(fragmentManager) }
         }
     }
 }
