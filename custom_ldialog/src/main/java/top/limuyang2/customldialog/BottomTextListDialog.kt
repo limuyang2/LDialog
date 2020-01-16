@@ -1,10 +1,10 @@
 package top.limuyang2.customldialog
 
-import android.support.v4.app.FragmentManager
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.Gravity
 import android.view.View
+import androidx.fragment.app.FragmentManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import top.limuyang2.customldialog.adapter.BottomTextListAdapter
 import top.limuyang2.ldialog.base.BaseLDialog
 import top.limuyang2.ldialog.base.ViewHandlerListener
@@ -60,7 +60,9 @@ class BottomTextListDialog : BaseLDialog<BottomTextListDialog>() {
 
     companion object {
         fun init(fragmentManager: FragmentManager): BottomTextListDialog {
-            return BottomTextListDialog().apply { setFragmentManager(fragmentManager) }
+            val dialog = BottomTextListDialog()
+            dialog.setFragmentManager(fragmentManager)
+            return dialog
         }
     }
 }

@@ -19,3 +19,5 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
+-keep class top.limuyang2.ldialog.base.ViewHandlerListener { *; }
+-keep class top.limuyang2.ldialog.base.OnDialogDismissListener { *; }

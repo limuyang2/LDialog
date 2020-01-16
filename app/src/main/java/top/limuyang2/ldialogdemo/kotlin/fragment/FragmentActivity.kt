@@ -1,7 +1,7 @@
 package top.limuyang2.ldialogdemo.kotlin.fragment
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import top.limuyang2.ldialogdemo.R
 
 /**

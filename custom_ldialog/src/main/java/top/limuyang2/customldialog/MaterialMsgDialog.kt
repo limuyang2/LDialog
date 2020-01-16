@@ -1,11 +1,11 @@
 package top.limuyang2.customldialog
 
-import android.support.annotation.ColorInt
-import android.support.v4.app.FragmentManager
 import android.view.View
 import android.widget.Button
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.fragment.app.FragmentManager
 import top.limuyang2.ldialog.base.BaseLDialog
 import top.limuyang2.ldialog.base.ViewHandlerListener
 import top.limuyang2.ldialog.base.ViewHolder
@@ -138,7 +138,9 @@ class MaterialMsgDialog : BaseLDialog<MaterialMsgDialog>() {
 
     companion object {
         fun init(fragmentManager: FragmentManager): MaterialMsgDialog {
-            return MaterialMsgDialog().apply { setFragmentManager(fragmentManager) }
+            val dialog = MaterialMsgDialog()
+            dialog.setFragmentManager(fragmentManager)
+            return dialog
         }
     }
 

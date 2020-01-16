@@ -7,11 +7,15 @@ import android.content.res.Configuration
 import android.graphics.Point
 import android.os.Bundle
 import android.os.Parcelable
-import android.support.annotation.*
-import android.support.v4.app.FragmentManager
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import androidx.annotation.DrawableRes
+import androidx.annotation.FloatRange
+import androidx.annotation.LayoutRes
+import androidx.annotation.StyleRes
+import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.FragmentManager
 import kotlinx.android.parcel.Parcelize
 import top.limuyang2.ldialog.R
 
@@ -22,7 +26,7 @@ import top.limuyang2.ldialog.R
  * @author limuyang
  */
 @Suppress("UNCHECKED_CAST")
-abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFragment() {
+abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
 
     protected var baseParams: BaseDialogParams
 
@@ -59,7 +63,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
 
         //Restore UI status
         savedInstanceState?.let {
-            baseParams = it.getParcelable(KEY_PARAMS)
+            baseParams = it.getParcelable(KEY_PARAMS) ?: BaseDialogParams()
             viewHandlerListener = savedInstanceState.getParcelable(KEY_VIEW_HANDLER)
             onDialogDismissListener = savedInstanceState.getParcelable(KEY_DISMISS_LISTENER)
         }
@@ -129,7 +133,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             when {
                 baseParams.widthScale > 0f -> {
                     if ((this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && baseParams.keepWidthScale)
-                        || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                         //横屏并且保持比例 或者 竖屏
                         params.width = (point.x * baseParams.widthScale).toInt()
                     }
@@ -141,7 +145,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
             when {
                 baseParams.heightScale > 0f -> {
                     if ((this.resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && baseParams.keepHeightScale)
-                        || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                            || this.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                         //横屏并且保持比例 或者 竖屏
                         params.height = (point.y * baseParams.heightScale).toInt()
                     }
@@ -168,13 +172,14 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
         }
     }
 
-    override fun onDismiss(dialog: DialogInterface?) {
+    override fun onDismiss(dialog: DialogInterface) {
         if (baseParams.needKeyboardViewId != 0) {
             val editText = view?.findViewById<EditText>(baseParams.needKeyboardViewId)
             val imm = context?.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
                     ?: return
             imm.hideSoftInputFromWindow(editText?.windowToken, 0)
         }
+
         super.onDismiss(dialog)
         onDialogDismissListener?.onDismiss(dialog)
     }
@@ -280,7 +285,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : android.support.v4.app.DialogFr
      * @param id Int EditTextView ID
      * @return T
      */
-    fun setNeedKeyboardEditTextId(@IdRes id: Int): T {
+    fun setNeedKeyboardEditTextId(id: Int): T {
         baseParams.needKeyboardViewId = id
         return this as T
     }
