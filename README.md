@@ -22,8 +22,8 @@ The library currently has the following features:
 
 > Source description：  
 > If you haven't gotten started with koltin, it is recommended to learn to use it. The environment version of this library is as follows：  
-> * kotlin 1.2.61
-> * Android support 27.1.1
+> * kotlin 1.3.61
+> * AndroidX
 
 ## Preview
 ![](https://github.com/limuyang2/LDialog/blob/master/screenshot/kap.gif)
