@@ -10,35 +10,34 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="24dp"
-        android:orientation="vertical"
-        tools:background="@color/bottom_text_list_dialog_divide_line_color">
+        android:orientation="vertical">
 
         <!--android:textColor="@color/material_dialog_title_color"-->
         <!--android:textSize="@dimen/material_dialog_title_size"-->
         <!--android:textStyle="bold"-->
         <TextView
-            style="@style/Base.DialogWindowTitle.AppCompat"
             android:id="@+id/title_tv"
+            android:textStyle="bold"
             android:layout_width="match_parent"
+            android:textSize="@dimen/material_dialog_title_size"
             android:layout_height="wrap_content"
+            android:textColor="#1B1B1B"
             android:gravity="left"
-
             tools:text="Title" />
 
         <TextView
-            style="@style/Theme.AppCompat.Dialog"
             android:id="@+id/msg_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:gravity="left"
+            android:textColor="#1B1B1B"
             android:textSize="@dimen/material_dialog_msg_size"
             tools:text="Message" />
     </LinearLayout>
 
 
     <LinearLayout
-        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
         android:id="@+id/bottomBtnLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,15 +45,14 @@
         android:gravity="right|center_vertical"
         android:orientation="horizontal"
         android:paddingLeft="16dp"
-        android:paddingRight="16dp"
-        tools:background="@color/bottom_text_list_dialog_divide_line_color">
+        android:paddingRight="16dp">
 
         <Button
             android:id="@+id/neg_btn"
-            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAllCaps="false"
+            style="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog"
             android:textColor="@color/material_dialog_neg_button_color"
             android:textSize="@dimen/material_dialog_neg_btn_text_size"
             tools:text="Close" />

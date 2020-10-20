@@ -19,7 +19,6 @@ abstract class ViewHandlerListener : Parcelable {
     }
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
-
     }
 
     constructor()
@@ -32,7 +31,7 @@ abstract class ViewHandlerListener : Parcelable {
             override fun createFromParcel(source: Parcel): ViewHandlerListener {
                 return object : ViewHandlerListener(source) {
                     override fun convertView(holder: ViewHolder, dialog: BaseLDialog<*>) {
-                        dialog.dismiss()
+
                     }
                 }
             }

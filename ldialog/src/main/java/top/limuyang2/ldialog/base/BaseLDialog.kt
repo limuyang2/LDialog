@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.res.Configuration
 import android.graphics.Point
 import android.os.Bundle
+import android.os.IBinder
 import android.os.Parcelable
 import android.view.*
 import android.view.inputmethod.InputMethodManager
@@ -30,18 +31,18 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
 
     protected var baseParams: BaseDialogParams
 
-    protected var viewHandlerListener: ViewHandlerListener?
+    protected var viewHandlerListener: ViewHandlerListener? = null
 
     private var onDialogDismissListener: OnDialogDismissListener? = null
 
     protected lateinit var mContext: Context
 
     init {
+        setStyle(STYLE_NORMAL, R.style.LDialogStyle)
         baseParams = BaseDialogParams().apply {
             layoutRes = layoutRes()
             view = layoutView()
         }
-        viewHandlerListener = this.viewHandler()
     }
 
     @LayoutRes
@@ -67,13 +68,19 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
             viewHandlerListener = savedInstanceState.getParcelable(KEY_VIEW_HANDLER)
             onDialogDismissListener = savedInstanceState.getParcelable(KEY_DISMISS_LISTENER)
         }
+
+        if (viewHandlerListener == null) {
+            viewHandlerListener = this.viewHandler()
+        }
+
+
     }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         super.onCreateView(inflater, container, savedInstanceState)
         //Clear the title of Android4.4
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog?.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return when {
             baseParams.layoutRes > 0 -> inflater.inflate(baseParams.layoutRes, container)
             baseParams.view != null -> baseParams.view!!
@@ -125,7 +132,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
         windowManager?.defaultDisplay?.getSize(point)
 
         //Set window
-        dialog.window?.let {
+        dialog?.window?.let {
             val params = it.attributes
             params.gravity = baseParams.gravity
             it.attributes
@@ -168,7 +175,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
         if (!baseParams.cancelable) {
             isCancelable = baseParams.cancelable
         } else {
-            dialog.setCanceledOnTouchOutside(baseParams.cancelableOutside)
+            dialog?.setCanceledOnTouchOutside(baseParams.cancelableOutside)
         }
     }
 
@@ -291,7 +298,7 @@ abstract class BaseLDialog<T : BaseLDialog<T>> : DialogFragment() {
     }
 
     fun show(): T {
-        show(baseParams.fragmentManager, baseParams.tag)
+        baseParams.fragmentManager?.let { show(it, baseParams.tag) }
         return this as T
     }
 
